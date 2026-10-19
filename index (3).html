@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wat is het antwoord?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.5s ease-in-out;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 12px;
+            width: 80%;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #images-container {
+            display: none;
+        }
+        #images-container img {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: fadeIn 1s;
+        }
+        #form-container {
+            display: none;
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #eee;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #6c7ae0;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fd;
+        }
+        tr:hover {
+            background-color: #f1f4f8;
+        }
+        .radio-cell {
+            text-align: center;
+        }
+        input[type="radio"] {
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stap 1: Wachtwoord Container -->
+    <div class="container" id="login-container">
+        <h2>Wat is het antwoord?</h2>
+        <input type="text" id="answer" placeholder="Typ je antwoord hier...">
+        <br>
+        <button onclick="checkAnswer()">Bevestig</button>
+        <p id="error-msg" style="color: #e74c3c; display: none; margin-top: 15px;">Dat is niet het juiste antwoord. Probeer het nog eens!</p>
+    </div>
+
+    <!-- Stap 2: Afbeeldingen Container -->
+    <div class="container" id="images-container">
+        <h2>Kijk eens aan...</h2>
+        <img id="slide-img" src="img1.png" alt="Verrassing afbeelding">
+    </div>
+
+    <!-- Stap 3: Keuzeformulier Container -->
+    <div class="container" id="form-container">
+        <h2>Kies een activiteit</h2>
+        <p>Maak hieronder je keuze. Je kunt maar één activiteit selecteren.</p>
+        
+        <!-- Let op: Formspree wordt hier gebruikt voor de mailfunctionaliteit op Github Pages -->
+        <!-- Vervang 'JOUW_FORMSPREE_ID' door de code die je krijgt als je een gratis formspree account aanmaakt -->
+        <form action="https://formspree.io/f/JOUW_FORMSPREE_ID" method="POST">
+            <table>
+                <tr>
+                    <th>Keuze</th>
+                    <th>Wat?</th>
+                    <th>Wat is het dan?</th>
+                    <th>Waar?</th>
+                    <th>Wanneer?</th>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Venus & Adonis" required></td>
+                    <td>Venus & Adonis</td>
+                    <td>Theater</td>
+                    <td>Nijmegen</td>
+                    <td>3 december</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="LIFT"></td>
+                    <td>LIFT</td>
+                    <td>Theater</td>
+                    <td>Amsterdam</td>
+                    <td>18 december</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Doloris"></td>
+                    <td>Doloris</td>
+                    <td>Doolhof</td>
+                    <td>Utrecht</td>
+                    <td>Vrij te kiezen</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Till death do us part"></td>
+                    <td>Till death do us part</td>
+                    <td>Dans</td>
+                    <td>Arnhem</td>
+                    <td>17 februari</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Laat me"></td>
+                    <td>Laat me</td>
+                    <td>Theater</td>
+                    <td>Arnhem</td>
+                    <td>22 februari</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="La Mer"></td>
+                    <td>La Mer</td>
+                    <td>Dans</td>
+                    <td>Amsterdam</td>
+                    <td>5 maart</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Metamorphosis"></td>
+                    <td>Metamorphosis</td>
+                    <td>Dans</td>
+                    <td>Amsterdam</td>
+                    <td>27 maart</td>
+                </tr>
+                <tr>
+                    <td class="radio-cell"><input type="radio" name="activiteit" value="Prison Island"></td>
+                    <td>Prison Island</td>
+                    <td>Puzzelbelevenis</td>
+                    <td>Utrecht of Nijmegen</td>
+                    <td>Vrij te kiezen</td>
+                </tr>
+            </table>
+            
+            <label for="email" style="display:block; margin-bottom: 10px; font-weight: bold;">Jouw e-mailadres (voor bevestiging):</label>
+            <input type="email" id="email" name="email" required style="padding: 10px; width: 100%; max-width: 300px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
+            <br>
+            <button type="submit" style="background-color: #27ae60;">Verstuur keuze</button>
+        </form>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            // Verwijder spaties en zet alles om naar kleine letters voor een robuustere check
+            const answer = document.getElementById("answer").value.replace(/\s+/g, '').toLowerCase();
+            const correctAnswer = "ifyouwantahotbodythenyoubetterworkbitch!";
+            const correctAnswerWithoutPunctuation = "ifyouwantahotbodythenyoubetterworkbitch";
+
+            if (answer === correctAnswer || answer === correctAnswerWithoutPunctuation) {
+                document.getElementById("login-container").style.display = "none";
+                showImages();
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+            }
+        }
+
+        function showImages() {
+            const imgContainer = document.getElementById("images-container");
+            const imgElement = document.getElementById("slide-img");
+            imgContainer.style.display = "block";
+
+            let currentImg = 1;
+            const totalImages = 6;
+            
+            // Toon elke afbeelding voor 2 seconden (2000 ms)
+            const interval = setInterval(() => {
+                currentImg++;
+                if (currentImg > totalImages) {
+                    clearInterval(interval);
+                    imgContainer.style.display = "none";
+                    document.getElementById("form-container").style.display = "block";
+                } else {
+                    // Forceer een herstart van de CSS animatie door het element even te klonen
+                    const newImg = imgElement.cloneNode(true);
+                    newImg.src = 'img' + currentImg + '.png';
+                    imgElement.parentNode.replaceChild(newImg, imgElement);
+                    // Update referentie naar nieuwe image
+                    imgElement = newImg; 
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
