@@ -124,8 +124,8 @@
 
     <!-- Stap 3: Keuzeformulier Container -->
     <div class="container" id="form-container">
-        <h2>Kies een activiteit</h2>
-        <p>Maak hieronder je keuze. Je kunt maar één activiteit selecteren.</p>
+        <h2>Kies een activiteit om samen te doen!!!</h2>
+        <p>Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
         
         <!-- Let op: Formspree wordt hier gebruikt voor de mailfunctionaliteit op Github Pages -->
         <!-- Vervang 'JOUW_FORMSPREE_ID' door de code die je krijgt als je een gratis formspree account aanmaakt -->
@@ -224,7 +224,7 @@
             imgContainer.style.display = "block";
 
             let currentImg = 1;
-            const totalImages = 6;
+            const totalImages = 17;
             
             // Toon elke afbeelding voor 2 seconden (2000 ms)
             const interval = setInterval(() => {
@@ -236,7 +236,7 @@
                 } else {
                     // Forceer een herstart van de CSS animatie door het element even te klonen
                     const newImg = imgElement.cloneNode(true);
-                    newImg.src = 'img' + currentImg + '.png';
+                    newImg.src = 'img' + currentImg + '.jpg';
                     imgElement.parentNode.replaceChild(newImg, imgElement);
                     // Update referentie naar nieuwe image
                     imgElement = newImg; 
