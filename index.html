@@ -2,9 +2,15 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- De toevoeging van maximum-scale=1.0 voorkomt dat telefoons (vooral iPhones) ongevraagd inzoomen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Verrassing!</title>
     <style>
+        /* Zorgt ervoor dat breedtes (100%) nooit stiekem breder worden door padding */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
@@ -25,7 +31,6 @@
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            box-sizing: border-box;
         }
         h2 {
             color: #2c3e50;
@@ -37,7 +42,7 @@
             margin-bottom: 20px;
             border: 2px solid #ddd;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 16px; /* 16px is cruciaal: kleiner dan dit zorgt ervoor dat iPhones automatisch inzoomen op het veld! */
             transition: border-color 0.3s;
         }
         input[type="text"]:focus {
@@ -59,40 +64,34 @@
         }
         
         #main-content {
-            display: none; /* Verborgen tot het wachtwoord klopt */
+            display: none;
             width: 100%;
             max-width: 800px;
         }
 
-        /* Styling voor de scrollbare foto galerij */
+        /* Styling voor de swipebare foto galerij */
         .gallery-container {
             display: flex;
             overflow-x: auto;
             gap: 15px;
             padding: 10px 0 20px 0;
-            -webkit-overflow-scrolling: touch; /* Voor soepel scrollen op mobiel */
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; 
         }
+        
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
         .gallery-container img {
-            height: 350px; /* Vaste hoogte, breedte past zich automatisch aan */
+            height: 350px; 
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            flex-shrink: 0; /* Voorkomt dat foto's samengedrukt worden */
+            flex-shrink: 0; 
             object-fit: cover;
-        }
-        /* Mooiere scrollbar voor de galerij */
-        .gallery-container::-webkit-scrollbar {
-            height: 10px;
-        }
-        .gallery-container::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-            border-radius: 5px;
-        }
-        .gallery-container::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 5px;
-        }
-        .gallery-container::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+            scroll-snap-align: center; 
+            max-width: 90vw; 
         }
 
         /* Tabel styling */
@@ -119,16 +118,41 @@
             background-color: #f1f4f8;
         }
 
-        /* Google Form Iframe styling */
         iframe {
             border-radius: 8px;
             border: 1px solid #eee;
+        }
+        
+        /* Grote mobiele optimalisatie slag */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px; /* Minder loze ruimte aan de buitenkant */
+            }
+            .container {
+                padding: 20px 15px; /* Minder witruimte in de witte blokken */
+            }
+            h2 {
+                font-size: 22px; /* Iets kleinere titels */
+            }
+            input[type="text"] {
+                width: 100%; /* Veld over de hele breedte */
+            }
+            button {
+                width: 100%; /* Knop over de hele breedte voor makkelijk klikken */
+            }
+            th, td {
+                padding: 8px 4px; /* Tabel compacter maken */
+                font-size: 13px; /* Tekst in tabel iets kleiner */
+            }
+            .gallery-container img {
+                height: 240px; /* Foto's een stuk minder hoog, zodat ze mooi op je scherm passen! */
+                max-width: 85vw;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Stap 1: Wachtwoord Container -->
     <div class="container" id="login-container">
         <h2>Wat is het antwoord?</h2>
         <input type="text" id="answer" placeholder="Typ je antwoord hier...">
@@ -137,13 +161,11 @@
         <p id="error-msg" style="color: #e74c3c; display: none; margin-top: 15px;">Dat is niet het juiste antwoord. Probeer het nog eens!</p>
     </div>
 
-    <!-- Stap 2: Hoofdcontent (Foto's, Tabel & Formulier) -->
     <div id="main-content">
         
-        <!-- Galerij -->
         <div class="container">
             <h2>HAPPY BDAY BITCH!!!! OL2MUS!!!!</h2>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">(Scroll of swipe naar rechts om alle foto's te bekijken 👉)</p>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">(Swipe naar links om alle foto's te bekijken 👉)</p>
             <div class="gallery-container">
                 <img src="img1.JPG" alt="Foto 1" loading="lazy">
                 <img src="img2.JPG" alt="Foto 2" loading="lazy">
@@ -165,7 +187,6 @@
             </div>
         </div>
 
-        <!-- Tabel en Google Form -->
         <div class="container" style="text-align: left;">
             <h2 style="text-align: center;">Kies een activiteit om samen te doen!!!</h2>
             <p style="text-align: center;">Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
@@ -187,7 +208,6 @@
                 <tr><td>Prison Island</td><td>Puzzelbelevenis</td><td>Utrecht of Nijmegen</td><td>Vrij te kiezen</td></tr>
             </table>
 
-            <!-- Het geïntegreerde Google Formulier -->
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc26dp2x2KAwdU-1RbPlgcB8Vd7vH18DdGa_bmOeqE5tVsMfg/viewform?embedded=true" width="100%" height="708" frameborder="0" marginheight="0" marginwidth="0">Laden…</iframe>
         </div>
 
@@ -195,13 +215,11 @@
 
     <script>
         function checkAnswer() {
-            // Verwijder spaties en zet alles om naar kleine letters voor een robuustere check
             const answer = document.getElementById("answer").value.replace(/\s+/g, '').toLowerCase();
             const correctAnswer = "ifyouwantahotbodythenyoubetterworkbitch!";
             const correctAnswerWithoutPunctuation = "ifyouwantahotbodythenyoubetterworkbitch";
 
             if (answer === correctAnswer || answer === correctAnswerWithoutPunctuation) {
-                // Verberg login, toon de rest
                 document.getElementById("login-container").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
             } else {
@@ -209,7 +227,6 @@
             }
         }
         
-        // Zorg dat 'Enter' ook werkt als klik op 'Bevestig'
         document.getElementById("answer").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
