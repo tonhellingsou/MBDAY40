@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wat is het antwoord?</title>
+    <title>Verrassing!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
             color: #333;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -24,7 +24,8 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            transition: all 0.5s ease-in-out;
+            margin-bottom: 30px;
+            box-sizing: border-box;
         }
         h2 {
             color: #2c3e50;
@@ -56,30 +57,55 @@
         button:hover {
             background-color: #2980b9;
         }
-        #images-container {
-            display: none;
+        
+        #main-content {
+            display: none; /* Verborgen tot het wachtwoord klopt */
+            width: 100%;
+            max-width: 800px;
         }
-        #images-container img {
-            max-width: 100%;
-            max-height: 60vh;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: fadeIn 1s;
+
+        /* Styling voor de scrollbare foto galerij */
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0 20px 0;
+            -webkit-overflow-scrolling: touch; /* Voor soepel scrollen op mobiel */
         }
-        #form-container {
-            display: none;
-            text-align: left;
+        .gallery-container img {
+            height: 350px; /* Vaste hoogte, breedte past zich automatisch aan */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0; /* Voorkomt dat foto's samengedrukt worden */
+            object-fit: cover;
         }
+        /* Mooiere scrollbar voor de galerij */
+        .gallery-container::-webkit-scrollbar {
+            height: 10px;
+        }
+        .gallery-container::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 5px;
+        }
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 5px;
+        }
+        .gallery-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* Tabel styling */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             background-color: white;
+            text-align: left;
         }
         th, td {
             border: 1px solid #eee;
-            padding: 15px;
-            text-align: left;
+            padding: 12px 15px;
         }
         th {
             background-color: #6c7ae0;
@@ -92,16 +118,11 @@
         tr:hover {
             background-color: #f1f4f8;
         }
-        .radio-cell {
-            text-align: center;
-        }
-        input[type="radio"] {
-            transform: scale(1.5);
-            cursor: pointer;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        /* Google Form Iframe styling */
+        iframe {
+            border-radius: 8px;
+            border: 1px solid #eee;
         }
     </style>
 </head>
@@ -116,91 +137,60 @@
         <p id="error-msg" style="color: #e74c3c; display: none; margin-top: 15px;">Dat is niet het juiste antwoord. Probeer het nog eens!</p>
     </div>
 
-    <!-- Stap 2: Afbeeldingen Container -->
-    <div class="container" id="images-container">
-        <h2>HAPPY BDAY BETCH!!!</h2>
-        <img id="slide-img" src="img1.png" alt="Verrassing afbeelding">
-    </div>
-
-    <!-- Stap 3: Keuzeformulier Container -->
-    <div class="container" id="form-container">
-        <h2>Kies een activiteit om samen te doen!!!</h2>
-        <p>Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
+    <!-- Stap 2: Hoofdcontent (Foto's, Tabel & Formulier) -->
+    <div id="main-content">
         
-        <!-- Let op: Formspree wordt hier gebruikt voor de mailfunctionaliteit op Github Pages -->
-        <!-- Vervang 'JOUW_FORMSPREE_ID' door de code die je krijgt als je een gratis formspree account aanmaakt -->
-        <form action="https://formspree.io/f/JOUW_FORMSPREE_ID" method="POST">
-            <table>
+        <!-- Galerij -->
+        <div class="container">
+            <h2>HAPPY BDAY BITCH!!!! OL2MUS!!!!</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">(Scroll of swipe naar rechts om alle foto's te bekijken 👉)</p>
+            <div class="gallery-container">
+                <img src="img1.JPG" alt="Foto 1" loading="lazy">
+                <img src="img2.JPG" alt="Foto 2" loading="lazy">
+                <img src="img3.JPG" alt="Foto 3" loading="lazy">
+                <img src="img4.JPG" alt="Foto 4" loading="lazy">
+                <img src="img5.JPG" alt="Foto 5" loading="lazy">
+                <img src="img6.JPG" alt="Foto 6" loading="lazy">
+                <img src="img7.JPG" alt="Foto 7" loading="lazy">
+                <img src="img8.JPG" alt="Foto 8" loading="lazy">
+                <img src="img9.JPG" alt="Foto 9" loading="lazy">
+                <img src="img10.JPG" alt="Foto 10" loading="lazy">
+                <img src="img11.JPG" alt="Foto 11" loading="lazy">
+                <img src="img12.JPG" alt="Foto 12" loading="lazy">
+                <img src="img13.JPG" alt="Foto 13" loading="lazy">
+                <img src="img14.JPG" alt="Foto 14" loading="lazy">
+                <img src="img15.JPG" alt="Foto 15" loading="lazy">
+                <img src="img16.JPG" alt="Foto 16" loading="lazy">
+                <img src="img17.JPG" alt="Foto 17" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Tabel en Google Form -->
+        <div class="container" style="text-align: left;">
+            <h2 style="text-align: center;">Kies een activiteit om samen te doen!!!</h2>
+            <p style="text-align: center;">Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
+            
+            <table style="margin-top: 30px;">
                 <tr>
-                    <th>Keuze</th>
                     <th>Wat?</th>
                     <th>Wat is het dan?</th>
                     <th>Waar?</th>
                     <th>Wanneer?</th>
                 </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Venus & Adonis" required></td>
-                    <td>Venus & Adonis</td>
-                    <td>Theater</td>
-                    <td>Nijmegen</td>
-                    <td>3 december</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="LIFT"></td>
-                    <td>LIFT</td>
-                    <td>Theater</td>
-                    <td>Amsterdam</td>
-                    <td>18 december</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Doloris"></td>
-                    <td>Doloris</td>
-                    <td>Doolhof</td>
-                    <td>Utrecht</td>
-                    <td>Vrij te kiezen</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Till death do us part"></td>
-                    <td>Till death do us part</td>
-                    <td>Dans</td>
-                    <td>Arnhem</td>
-                    <td>17 februari</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Laat me"></td>
-                    <td>Laat me</td>
-                    <td>Theater</td>
-                    <td>Arnhem</td>
-                    <td>22 februari</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="La Mer"></td>
-                    <td>La Mer</td>
-                    <td>Dans</td>
-                    <td>Amsterdam</td>
-                    <td>5 maart</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Metamorphosis"></td>
-                    <td>Metamorphosis</td>
-                    <td>Dans</td>
-                    <td>Amsterdam</td>
-                    <td>27 maart</td>
-                </tr>
-                <tr>
-                    <td class="radio-cell"><input type="radio" name="activiteit" value="Prison Island"></td>
-                    <td>Prison Island</td>
-                    <td>Puzzelbelevenis</td>
-                    <td>Utrecht of Nijmegen</td>
-                    <td>Vrij te kiezen</td>
-                </tr>
+                <tr><td>Venus & Adonis</td><td>Theater</td><td>Nijmegen</td><td>3 december</td></tr>
+                <tr><td>LIFT</td><td>Theater</td><td>Amsterdam</td><td>18 december</td></tr>
+                <tr><td>Doloris</td><td>Doolhof</td><td>Utrecht</td><td>Vrij te kiezen</td></tr>
+                <tr><td>Till death do us part</td><td>Dans</td><td>Arnhem</td><td>17 februari</td></tr>
+                <tr><td>Laat me</td><td>Theater</td><td>Arnhem</td><td>22 februari</td></tr>
+                <tr><td>La Mer</td><td>Dans</td><td>Amsterdam</td><td>5 maart</td></tr>
+                <tr><td>Metamorphosis</td><td>Dans</td><td>Amsterdam</td><td>27 maart</td></tr>
+                <tr><td>Prison Island</td><td>Puzzelbelevenis</td><td>Utrecht of Nijmegen</td><td>Vrij te kiezen</td></tr>
             </table>
-            
-            <label for="email" style="display:block; margin-bottom: 10px; font-weight: bold;">Jouw e-mailadres (voor bevestiging):</label>
-            <input type="email" id="email" name="email" required style="padding: 10px; width: 100%; max-width: 300px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
-            <br>
-            <button type="submit" style="background-color: #27ae60;">Verstuur keuze</button>
-        </form>
+
+            <!-- Het geïntegreerde Google Formulier -->
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc26dp2x2KAwdU-1RbPlgcB8Vd7vH18DdGa_bmOeqE5tVsMfg/viewform?embedded=true" width="100%" height="708" frameborder="0" marginheight="0" marginwidth="0">Laden…</iframe>
+        </div>
+
     </div>
 
     <script>
@@ -211,38 +201,21 @@
             const correctAnswerWithoutPunctuation = "ifyouwantahotbodythenyoubetterworkbitch";
 
             if (answer === correctAnswer || answer === correctAnswerWithoutPunctuation) {
+                // Verberg login, toon de rest
                 document.getElementById("login-container").style.display = "none";
-                showImages();
+                document.getElementById("main-content").style.display = "block";
             } else {
                 document.getElementById("error-msg").style.display = "block";
             }
         }
-
-        function showImages() {
-            const imgContainer = document.getElementById("images-container");
-            const imgElement = document.getElementById("slide-img");
-            imgContainer.style.display = "block";
-
-            let currentImg = 1;
-            const totalImages = 17;
-            
-            // Toon elke afbeelding voor 2 seconden (2000 ms)
-            const interval = setInterval(() => {
-                currentImg++;
-                if (currentImg > totalImages) {
-                    clearInterval(interval);
-                    imgContainer.style.display = "none";
-                    document.getElementById("form-container").style.display = "block";
-                } else {
-                    // Forceer een herstart van de CSS animatie door het element even te klonen
-                    const newImg = imgElement.cloneNode(true);
-                    newImg.src = 'img' + currentImg + '.JPG';
-                    imgElement.parentNode.replaceChild(newImg, imgElement);
-                    // Update referentie naar nieuwe image
-                    imgElement = newImg; 
-                }
-            }, 2000);
-        }
+        
+        // Zorg dat 'Enter' ook werkt als klik op 'Bevestig'
+        document.getElementById("answer").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkAnswer();
+            }
+        });
     </script>
 </body>
 </html>
