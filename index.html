@@ -20,7 +20,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden; /* Belangrijk: voorkomt dat de hele pagina zijwaarts kan scrollen */
+            overflow-x: hidden;
         }
         .container {
             max-width: 800px;
@@ -35,6 +35,13 @@
             color: #2c3e50;
             margin-bottom: 20px;
         }
+        
+        /* Specifieke styling voor de lange inlog-titel */
+        .login-title {
+            font-size: 24px;
+            line-height: 1.4;
+        }
+
         input[type="text"] {
             padding: 12px;
             width: 80%;
@@ -94,27 +101,23 @@
             max-width: 90vw; 
         }
 
-        /* Tabel Wrapper voor mobiel swipen */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 20px;
-            margin-bottom: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 0 1px #eee; /* Subtiel randje */
-        }
-
+        /* Tabel styling */
         table {
             width: 100%;
-            min-width: 500px; /* Forceert de tabel breed te blijven zodat tekst niet breekt, en activeert de scroll */
             border-collapse: collapse;
             background-color: white;
             text-align: left;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px #eee;
+            overflow: hidden;
+            table-layout: fixed; /* Zorgt dat kolommen hun ruimte netjes verdelen */
         }
         th, td {
             border: 1px solid #eee;
-            padding: 12px 15px;
+            padding: 12px 10px;
+            word-wrap: break-word; /* Breekt lange woorden af als het echt niet past */
         }
         th {
             background-color: #6c7ae0;
@@ -131,33 +134,40 @@
         iframe {
             border-radius: 8px;
             border: 1px solid #eee;
+            min-height: 800px; /* Forceert hoogte op iPhones */
+            background-color: #fafafa;
         }
         
         /* Grote mobiele optimalisatie slag */
         @media (max-width: 600px) {
             body {
-                padding: 0; /* Haalt de grijze randen aan de zijkant weg */
-                background-color: white; /* Maakt de hele achtergrond wit */
+                padding: 0; 
+                background-color: white; 
             }
             .container {
-                padding: 30px 15px;
-                border-radius: 0; /* Strak tegen de schermranden */
-                box-shadow: none; /* Geen zwevend effect nodig op mobiel */
+                padding: 30px 10px; /* Minder padding aan zijkanten */
+                border-radius: 0; 
+                box-shadow: none; 
                 margin-bottom: 10px;
             }
+            .login-title {
+                font-size: 20px; /* Iets kleiner op mobiel zodat het beter past */
+            }
             h2 {
-                font-size: 24px; 
+                font-size: 22px; 
             }
             input[type="text"], button {
                 width: 100%;
             }
             .gallery-container img {
-                height: 280px; /* Iets groter weer omdat we nu het hele scherm gebruiken */
+                height: 280px; 
                 max-width: 85vw;
             }
+            /* Tabel extreem verkleinen voor mobiel zodat hij past zonder scrollen */
             th, td {
-                padding: 10px 8px; 
-                font-size: 14px; 
+                padding: 6px 3px; /* Minimale ruimte */
+                font-size: 11px; /* Zeer klein lettertype zodat 4 kolommen passen */
+                line-height: 1.2;
             }
         }
     </style>
@@ -165,7 +175,7 @@
 <body>
 
     <div class="container" id="login-container">
-        <h2>Wat is het antwoord? Alleen kleine letters zonder spatie met leesteken op het end!</h2>
+        <h2 class="login-title">Wat is het antwoord? Alleen kleine letters zonder spatie met leesteken op het end!</h2>
         <input type="text" id="answer" placeholder="Typ je antwoord hier...">
         <br>
         <button onclick="checkAnswer()">Bevestig</button>
@@ -200,28 +210,27 @@
 
         <div class="container" style="text-align: left;">
             <h2 style="text-align: center;">Kies een activiteit om samen te doen!!!</h2>
-            <p style="text-align: center;">Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
+            <p style="text-align: center; margin-bottom: 30px;">Maak hieronder je keuze. Je kunt maar één activiteit selecteren. Wees snel, want ik kan niet garanderen dat overal altijd nog tickets voor zijn hey!! Of dat Loret haar drukke agenda vrij kan houden!!</p>
             
-            <div class="table-responsive">
-                <table>
-                    <tr>
-                        <th>Wat?</th>
-                        <th>Wat is het dan?</th>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                    </tr>
-                    <tr><td>Venus & Adonis</td><td>Theater</td><td>Nijmegen</td><td>3 december</td></tr>
-                    <tr><td>LIFT</td><td>Theater</td><td>Amsterdam</td><td>18 december</td></tr>
-                    <tr><td>Doloris</td><td>Doolhof</td><td>Utrecht</td><td>Vrij te kiezen</td></tr>
-                    <tr><td>Till death do us part</td><td>Dans</td><td>Arnhem</td><td>17 februari</td></tr>
-                    <tr><td>Laat me</td><td>Theater</td><td>Arnhem</td><td>22 februari</td></tr>
-                    <tr><td>La Mer</td><td>Dans</td><td>Amsterdam</td><td>5 maart</td></tr>
-                    <tr><td>Metamorphosis</td><td>Dans</td><td>Amsterdam</td><td>27 maart</td></tr>
-                    <tr><td>Prison Island</td><td>Puzzelbelevenis</td><td>Utrecht of Nijmegen</td><td>Vrij te kiezen</td></tr>
-                </table>
-            </div>
+            <table>
+                <tr>
+                    <th>Wat?</th>
+                    <th>Wat is het dan?</th>
+                    <th>Waar?</th>
+                    <th>Wanneer?</th>
+                </tr>
+                <tr><td>Venus & Adonis</td><td>Theater</td><td>Nijmegen</td><td>3 december</td></tr>
+                <tr><td>LIFT</td><td>Theater</td><td>Amsterdam</td><td>18 december</td></tr>
+                <tr><td>Doloris</td><td>Doolhof</td><td>Utrecht</td><td>Vrij te kiezen</td></tr>
+                <tr><td>Till death do us part</td><td>Dans</td><td>Arnhem</td><td>17 februari</td></tr>
+                <tr><td>Laat me</td><td>Theater</td><td>Arnhem</td><td>22 februari</td></tr>
+                <tr><td>La Mer</td><td>Dans</td><td>Amsterdam</td><td>5 maart</td></tr>
+                <tr><td>Metamorphosis</td><td>Dans</td><td>Amsterdam</td><td>27 maart</td></tr>
+                <tr><td>Prison Island</td><td>Puzzelbelevenis</td><td>Utrecht of Nijmegen</td><td>Vrij te kiezen</td></tr>
+            </table>
 
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc26dp2x2KAwdU-1RbPlgcB8Vd7vH18DdGa_bmOeqE5tVsMfg/viewform?embedded=true" width="100%" height="708" frameborder="0" marginheight="0" marginwidth="0">Laden…</iframe>
+            <!-- Het src attribuut is hier leeg gelaten, dit wordt via Javascript ingeladen na het inloggen om iPhone bugs te voorkomen -->
+            <iframe id="google-form" src="" width="100%" height="850" frameborder="0" marginheight="0" marginwidth="0">Laden…</iframe>
         </div>
 
     </div>
@@ -233,8 +242,18 @@
             const correctAnswerWithoutPunctuation = "ifyouwantahotbodythenyoubetterworkbitch";
 
             if (answer === correctAnswer || answer === correctAnswerWithoutPunctuation) {
+                // Verberg inlogscherm
                 document.getElementById("login-container").style.display = "none";
+                
+                // Toon de hoofdcontent
                 document.getElementById("main-content").style.display = "block";
+
+                // Belangrijke fix voor iOS/iPhones: Laad het Google Formulier pas in zodra het zichtbaar is.
+                // Anders blijft het formulier een lege witte doos.
+                const formIframe = document.getElementById("google-form");
+                if (!formIframe.src || formIframe.src === window.location.href) {
+                    formIframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSc26dp2x2KAwdU-1RbPlgcB8Vd7vH18DdGa_bmOeqE5tVsMfg/viewform?embedded=true";
+                }
             } else {
                 document.getElementById("error-msg").style.display = "block";
             }
